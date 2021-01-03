@@ -1,13 +1,11 @@
 // 返回数据对象
-const resultData = (code, success, messge, data, token) => {
-    code = code ? code : 99999
-    success = success ? success : false
-    messge = messge ? messge : '服务器无返回信息'
-    data = data ? data : null
+function ResultData(code, success, messge, data, token) {
+    this.code = code ? code : 99999
+    this.success = success ? success : false
+    this.messge = messge ? messge : '服务器无返回信息'
+    this.data = data ? data : null
     if (token) {
-        return { code, success, messge, data, token }
-    } else {
-        return { code, success, messge, data }
+        this.token = token
     }
 }
 
@@ -24,7 +22,17 @@ const createFolder = function (folder) {
     }
 };
 
+const moment = require('moment');
+ moment.locale('zh-cn');
+// 处理时间
+const newDate = (date)=>{
+    let _today = moment(date);
+    let newdate = _today.format('YYYY-MM-DD'); /*现在的时间*/
+    return newdate
+}
+
 module.exports = {
-    resultData,
-    createFolder
+    ResultData,
+    createFolder,
+    newDate
 }

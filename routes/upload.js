@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { resultData, createFolder } = require('../util/public')
+const { ResultData, createFolder } = require('../util/public')
 const multer = require('multer');
 const fs = require("fs");
 const { myUrl } = require('../util/myPort')
@@ -24,10 +24,10 @@ router.post('/', multer({
             size: file.size,
             path: myUrl + path.replace('./public/','/') // 拼接地址
         }
-        const successVal = resultData(200, true, "上传成功", fileInfo)
+        const successVal = new ResultData(200, true, "上传成功", fileInfo)
         res.send(successVal);
     } catch (error) {
-        const errVal = resultData(500, false, "上传失败")
+        const errVal = new ResultData(500, false, "上传失败")
         res.send(errVal);
     }
 })

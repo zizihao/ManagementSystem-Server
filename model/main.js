@@ -1,6 +1,7 @@
-const { getUsers, retrieveUsername } = require('./User')
+const { getUsers, retrieveUsername, getIdUserInfo } = require('./User')
 
 module.exports = {
     getUsers,
-    retrieveUsername
+    retrieveUsername,
+    getIdUserInfo
 }

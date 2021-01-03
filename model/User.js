@@ -14,4 +14,11 @@ const retrieveUsername = function (username, callback) {
     })
 }
 
-module.exports = { getUsers, retrieveUsername }
+// 根据Id返回单个用户信息
+const getIdUserInfo = function(id,callback){
+    conn(`select * from users where id = "${id}"`, (err, results) => {
+        callback(err, results)
+    })
+}
+
+module.exports = { getUsers, retrieveUsername ,getIdUserInfo}

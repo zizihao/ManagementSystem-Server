@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { retrieveUsername } = require('../model/main')
 const { createToken } = require('../util/jwt')
-const { resultData } = require('../util/public')
+const { ResultData } = require('../util/public')
 
 // 用户名不存在
-const noneVal = resultData(403, false, "登录失败，用户名不存在")
+const noneVal =new ResultData(403, false, "登录失败，用户名不存在")
 // 错误账号
-const errVal = resultData(403, false, "登录失败，账号或密码错误")
+const errVal = new ResultData(403, false, "登录失败，账号或密码错误")
 
 router.post('/', (req, res) => {
     const { username, password } = req.body
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
             } else if (password === data[0].password) {
                 // 成功
                 const token = createToken({ username, password })
-                const successVal = resultData(200, true, "登录成功", null, token)
+                const successVal = new ResultData(200, true, "登录成功", null, token)
                 res.send(successVal);
             }
             else {
@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
             }
         } else {
             // 服务器错误
-            const errServeVal = resultData(500, false, err)
+            const errServeVal = new ResultData(500, false, err)
             res.send(errServeVal);
         }
     })
